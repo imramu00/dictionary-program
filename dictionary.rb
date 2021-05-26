@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'net/http'
 require 'json'
 
@@ -15,7 +16,7 @@ class Dictionary
     json_data =  JSON.parse(response)
   end
 
-  def word_finder1(word_possibility)
+  def word_checker(word_possibility)
     valid_words=[]
     word_possibility.each{ |word|
       if (system("look #{word} > new.txt"))
@@ -28,41 +29,47 @@ class Dictionary
     valid_words
   end
 
-  def word_finder2(word_array)
+  def word_predictor(word_array)
     similar_words=[]
       word_array.each { |word|
       system("look #{word} > new.txt")
       f = File.open("new.txt")
       f.each_line {|line| similar_words << line.chomp }
     }
-    self.word_finder1(similar_words)
+    self.word_checker(similar_words)
   end
+end
+
+begin
+	system 'clear'
 end
 
 puts "Enter a word to get the meaning: "
 word=gets.chomp
 json = Dictionary.new(word)
 json_data = json.response(word)
+arr=[]
+valid_words = nil
+word_possibility = nil
 
 if (json_data[0] != nil)
   p json_data[0]["meanings"][0]["definitions"][0]["definition"]
 else
   word_possibility = word.chars.to_a.permutation.map(&:join)
-  valid_words = json.word_finder1(word_possibility)
+  valid_words = json.word_checker(word_possibility)
 
   if valid_words.length > 0
     puts "Did you mean "+valid_words[0]
   else
-    arr=[]
 
     for i in 2..(word.length-1)
       arr << word.slice(1..i)
     end
 
-    valid_words1 = json.word_finder2(arr)
+    valid_words = json.word_predictor(arr)
 
-    if valid_words1.length > 0
-      puts "Did you mean "+valid_words1[0]
+    if valid_words.length > 0
+      puts "Did you mean "+valid_words[0]
     else
       puts "Check the entered word"
     end
