@@ -31,8 +31,7 @@ class Dictionary
   def word_finder2(word_array)
     similar_words=[]
       word_array.each { |word|
-      command = "look #{word} > new.txt"
-      system(command)
+      system("look #{word} > new.txt")
       f = File.open("new.txt")
       f.each_line {|line| similar_words << line.chomp }
     }
