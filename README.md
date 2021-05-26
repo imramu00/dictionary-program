@@ -7,4 +7,4 @@
 #####  $ sudo apt-get install -y wamerican
 #####  $ gem install json 
 #####  $ gem install net/http
-#####  $ ruby Dictionary.rb
+#####  $ ruby dictionary.rb
