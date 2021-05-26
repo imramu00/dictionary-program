@@ -31,8 +31,7 @@ class Dictionary
   def word_finder2(word_array)
     similar_words=[]
       word_array.each { |word|
-      my_words = File.open("/usr/share/dict/words","r")
-      command = "grep \'^"+word+"\' /usr/share/dict/words > new.txt"
+      command = "look #{word} > new.txt"
       system(command)
       f = File.open("new.txt")
       f.each_line {|line| similar_words << line.chomp }
@@ -57,7 +56,7 @@ else
   else
     arr=[]
 
-    for i in (word.length-1)..2
+    for i in 2..(word.length-1)
       arr << word.slice(1..i)
     end
 
