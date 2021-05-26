@@ -44,7 +44,7 @@ begin
 	system 'clear'
 end
 
-arr=[]
+arr= nil
 valid_words = nil
 word_possibility = nil
 puts "Enter a word to get the meaning: "
