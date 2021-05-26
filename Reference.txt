@@ -1,0 +1,5 @@
+require "json"
+require "net/http"
+
+respone = Net::HTTP.get(URI('https://api.dictionaryapi.dev/api/v2/entries/en_US/'+word) # returns a JSON file
+json_data =  JSON.parse(response) # returns a hash

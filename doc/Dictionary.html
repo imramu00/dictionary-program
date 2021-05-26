@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Dictionary - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Object
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-response">#response</a>
+    <li ><a href="#method-i-word_checker">#word_checker</a>
+    <li ><a href="#method-i-word_predictor">#word_predictor</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Dictionary">
+  <h1 id="class-Dictionary" class="class">
+    class Dictionary
+  </h1>
+
+  <section class="description">
+    
+<p>Class dictionary holds methods to find meaning for a word and suggestion of words</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-word" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">word</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(word)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>initializer of the class taking a string as argument</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File dictionary.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">word</span>)
+  <span class="ruby-ivar">@word</span>=<span class="ruby-identifier">word</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-response" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">response</span><span
+            class="method-args">(word)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>response method</p>
+
+<pre>this method takes a word as it&#39;s argument and gets the meaning of the given word by REST API
+The response will be in JSON format
+The JSON file can be parsed using JSON gem
+The parsed JSON will give a Hash</pre>
+
+          <div class="method-source-code" id="response-source">
+            <pre><span class="ruby-comment"># File dictionary.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">response</span>(<span class="ruby-identifier">word</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-string">&#39;https://api.dictionaryapi.dev/api/v2/entries/en_US/&#39;</span><span class="ruby-operator">+</span><span class="ruby-identifier">word</span>
+  <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">response</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">uri</span>)
+  <span class="ruby-identifier">json_data</span> =  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-word_checker" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">word_checker</span><span
+            class="method-args">(word_possibility)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p><a href="Dictionary.html#method-i-word_checker"><code>word_checker</code></a></p>
+
+<pre>this method takes an array of strings as the argument and returns the first valid english string in the array.</pre>
+
+          <div class="method-source-code" id="word_checker-source">
+            <pre><span class="ruby-comment"># File dictionary.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">word_checker</span>(<span class="ruby-identifier">word_possibility</span>)
+  <span class="ruby-identifier">valid_words</span>=[]
+  <span class="ruby-identifier">word_possibility</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;look #{word} &gt; new.txt&quot;</span>))
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>(<span class="ruby-identifier">word</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">!=</span><span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">valid_words</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">word</span>
+        <span class="ruby-keyword">break</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-identifier">valid_words</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-word_predictor" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">word_predictor</span><span
+            class="method-args">(word_array)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p><a href="Dictionary.html#method-i-word_predictor"><code>word_predictor</code></a></p>
+
+<pre>this method takes an array of strings as argument and returns an array with all the possible english words starting with each string of the input array.</pre>
+
+          <div class="method-source-code" id="word_predictor-source">
+            <pre><span class="ruby-comment"># File dictionary.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">word_predictor</span>(<span class="ruby-identifier">word_array</span>)
+  <span class="ruby-identifier">similar_words</span>=[]
+    <span class="ruby-identifier">word_array</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;look #{word} &gt; new.txt&quot;</span>)
+    <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&quot;new.txt&quot;</span>)
+    <span class="ruby-identifier">f</span>.<span class="ruby-identifier">each_line</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">similar_words</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span> }
+  }
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">word_checker</span>(<span class="ruby-identifier">similar_words</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
