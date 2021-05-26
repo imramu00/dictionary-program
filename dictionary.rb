@@ -44,13 +44,13 @@ begin
 	system 'clear'
 end
 
+arr=[]
+valid_words = nil
+word_possibility = nil
 puts "Enter a word to get the meaning: "
 word=gets.chomp
 json = Dictionary.new(word)
 json_data = json.response(word)
-arr=[]
-valid_words = nil
-word_possibility = nil
 
 if (json_data[0] != nil)
   p json_data[0]["meanings"][0]["definitions"][0]["definition"]
